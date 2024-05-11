@@ -12,7 +12,7 @@ const apiKey = `${process.env.FREBASE_KEY}`;
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBoks-qQV7eu9iAtQwellLY5OfgaesryAg",
+  apiKey: "#####",
   authDomain: "corbett-jewelry.firebaseapp.com",
   projectId: "corbett-jewelry",
   storageBucket: "corbett-jewelry.appspot.com",
