@@ -1,0 +1,138 @@
+* { position: relative;  }
+/* html { background: ghostwhite; font-size: 62.5%; } */
+/* body { font-size: 1.618rem; padding-top: 2rem; } */
+
+/* — Checkout Process from da future ———————— */
+ 
+.header { 
+   padding: 2rem;
+    border-radius: 4px 4px 0 0;
+    color: white;
+    background: #e74c3c;
+    overflow-x: hidden;
+}
+
+.m-checkout {
+  width: 42rem;
+  margin: 0 auto;
+  
+
+  
+.m-checkout__form {
+    padding: 2rem;
+    margin-top: 5rem;
+    border-radius: 0 0 4px 4px;
+    font-family: "Ubuntu Light", "Lucida Grande", sans-serif;
+    background-color: #ffffff;
+    border: 2px solid #95a5a6;
+  
+  
+  fieldset { border: 0; padding: 0; margin: 0; line-height: 0; }
+
+  label {
+      color: #7f8c8d;
+      font-family: "Ubuntu Medium", "Lucida Grande", sans-serif;
+      font-size: 1.4rem;
+      cursor: pointer;
+      float: right;
+      bottom: 26px;
+      z-index: 10;
+      right: 15px      
+  }  
+    
+  input {
+    width: 100%;
+    padding: 1.5rem 9.5rem 1.5rem 1.5rem;
+    border: 0;
+    color: #555;
+    border: 1px solid lighten(#95a5a6, 20%);
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    outline: none;
+    
+    &:first-of-type { border-top-width: 1px; border-radius: 4px 4px 0 0; }  
+    &:nth-of-type(2n+2) { 
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+    }
+    &:last-of-type { border-bottom-width: 1px; border-radius: 0 0 4px 4px; }  
+    
+
+      &.touched:valid + label { color: rgb(46,204,113); transition: color .28s ease; }
+      &.touched:focus:invalid + label { color: rgb(231,76,60); transition: color .28s ease; }
+       
+        
+  } 
+   
+  .checkbox {
+    margin: 18px 0 50px 0;
+    label { float: left; top: 19px; left: 20px; }
+    input { float: left; width: auto; }
+  }  
+  
+  .btn {
+    padding: 1.3rem;
+    border: 0;
+    background: transparent;
+    font-weight: 700;
+    font-size: 1.8rem;
+      
+      &.btn--block { width: 100%; }
+      &.btn--rounded { border-radius: 4px; }
+      &.btn--success { color: #ecf0f1; text-shadow: 0 2px 0 #08AEC4; background: #08AEC4; border-bottom: 3px solid #08AEC4; padding: 2rem }
+      &[disabled] { opacity: .5; color: #ecf0f1; text-shadow: 0 2px 0 #7f8c8d; background: #95a5a6; border-bottom: 3px solid #7f8c8d; padding: 2rem; }
+       
+  } 
+    
+}
+  
+  .icon-truck {
+    float: right;
+    opacity: .33;
+  }
+  
+  .icon-gift { opacity: .33; }
+
+  
+} 
+
+/* ——————————————————————————————————— */
+
+.is-almost-there,
+.is-there { transition: left .45s ease; }
+.is-almost-there { left: 45%; }
+
+.is-there { left: 85% }
+
+.is-going-into-the-truck {
+  animation: into-truck 2s ease forwards;
+}
+
+.is-delivering {
+   animation: truck-move 2s ease forwards,
+              start-engine .28s 2s infinite ease,
+              truck-drive 2s 3s ease forwards;
+}
+
+@keyframes into-truck {
+  0% { top: 5px; }
+  25% { top: -25px;  }
+  50% { left: 94%; }
+  100% { top: 0px; left: 97%; font-size: .0rem; opacity: 0; }
+
+}
+
+@keyframes truck-move {
+  0% {  }
+  100% { opacity: 1; transform: scaleX(-1) }
+}
+
+@keyframes start-engine {
+  from {}
+  to { top: -.1rem; }
+}
+
+@keyframes truck-drive {
+  from {}
+  to { right: -50px; }
+}

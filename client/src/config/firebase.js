@@ -3,10 +3,14 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+const apiKey = `${process.env.FREBASE_KEY}`;
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyBoks-qQV7eu9iAtQwellLY5OfgaesryAg",
   authDomain: "corbett-jewelry.firebaseapp.com",
@@ -16,6 +20,7 @@ const firebaseConfig = {
   appId: "1:963640321962:web:d57f51c96ead5d20362dd3"
 };
 
+console.log(firebaseConfig)
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app); 

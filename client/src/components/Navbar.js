@@ -3,7 +3,7 @@ import './Navbar.css';
 import { React, useEffect, useState } from 'react';
 import Footer from './Footer';
 import { NavLink, Outlet } from 'react-router-dom';
-
+import logo from "../images/logo.png";
 import { auth } from '../config/firebase';
 import { signOut } from 'firebase/auth';
 
@@ -77,19 +77,15 @@ function Navbar(props) {
     }
   }
 
-  if (props.location === undefined) {
-    // var bgDisplay = props.location == '/' ? '' : `url(${process.env.PUBLIC_URL}/images/batman-homepage.jpg)`;
-    var bgDisplay = ""
-  }
 
   return (
     <>
-      <div style={{ backgroundImage: bgDisplay }} className="nav navbar fadeInDown animate-fadeInDown">
+      <div className="nav navbar fadeInDown animate-fadeInDown">
         <input type="checkbox" id="nav-check" />
         <div className="nav-header">
           <div className="nav-title">
             <NavLink to="/">
-              {/* <img className="logo" src={logo} alt="Logo" /> */}
+              <img className="logo" src={logo} alt="Logo" />
             </NavLink>
           </div>
         </div>
@@ -102,10 +98,7 @@ function Navbar(props) {
         </div>
 
         <div className="nav-links navbar-items">
-          <NavLink to="/">Home</NavLink>
-          {<NavLink to="/nutrition">Nutrition</NavLink>}
-          {signnedIn && <NavLink to="/profile">Profile</NavLink>}
-          {<NavLink to="/workouts">Workouts</NavLink>}
+          <NavLink to="/products">Home</NavLink>
           {!signnedIn && <NavLink to={`/signup`}>Sign-Up</NavLink>}
           {signnedIn && <NavLink onClick={handleSignOut}>Sign-Out</NavLink>}
           {!signnedIn && <NavLink to="/signin">Sign-In</NavLink>}
@@ -115,7 +108,7 @@ function Navbar(props) {
         <Outlet></Outlet>
       </main>
 
-      {props.location && <Footer></Footer>}
+    <Footer></Footer>
     </>
   );
 }

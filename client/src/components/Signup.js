@@ -3,7 +3,7 @@ import {createUserWithEmailAndPassword} from 'firebase/auth'
 import React, { useEffect } from 'react'
 import { auth, db } from '../config/firebase'
 import { setDoc, doc, collection } from 'firebase/firestore'
-import useNavigate from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import Footer from './Footer'
 
 
@@ -12,8 +12,8 @@ function Signup(props){
     const [password, setPassword] = React.useState('')
     const [confirmPassword, setConfirmPassword] = React.useState('')
     const [errorMessage, setErrorMessage] = React.useState(null)
-
-  const userCollection = collection(db, 'users')
+    const navigate = useNavigate();
+    const userCollection = collection(db, 'users')
 
     const addUserData = async ()=>{
       try{
@@ -57,7 +57,7 @@ function Signup(props){
           }
           await createUserWithEmailAndPassword(auth, email, password)
           await addUserData()
-          window.location.href="/"
+          navigate("/products")
       }
       catch(e){
         setErrorMessage(e.message)
@@ -71,8 +71,6 @@ function Signup(props){
         },1500)
       }
     }
-
-    props.setLocation('/signup')
 
     return(
       <div>

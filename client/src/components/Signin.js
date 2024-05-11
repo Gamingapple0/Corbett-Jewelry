@@ -3,6 +3,7 @@ import {signInWithEmailAndPassword} from 'firebase/auth'
 import React from 'react'
 import { auth } from '../config/firebase'
 import Footer from './Footer'
+import { useNavigate } from 'react-router'
 
 
 
@@ -10,12 +11,13 @@ function Signin(props){
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [errorMessage, setErrorMessage] = React.useState(null)
+    const navigate = useNavigate();
 
 
     const FirebaseSignIn = async ()=>{
         try{
           await signInWithEmailAndPassword(auth, email, password)
-          window.location.href="/"
+          navigate("/products")
         }
         catch(e){
             setErrorMessage(e.message)
@@ -30,8 +32,10 @@ function Signin(props){
           }
         }
 
+    const NavigateSignUp = ()=>{
+        navigate("/signup")
+    }
 
-    props.setLocation('/signin')
 
     return(
         <div>
@@ -45,6 +49,8 @@ function Signin(props){
           <input type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
           <br></br>
           <button className="form-button" type="button" onClick={FirebaseSignIn} name="Hover">Sign-In</button>
+          <br></br>
+          <button className="form-button" type="button" onClick={NavigateSignUp} name="Hover">Create Account</button>
        </form>
     </div>
     <br></br>
