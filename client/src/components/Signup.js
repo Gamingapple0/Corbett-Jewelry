@@ -74,9 +74,9 @@ function Signup(props){
 
     return(
       <div>
-        <div className="password-error">
+        {errorMessage &&<div className="password-error">
             Error: {errorMessage}
-        </div>
+        </div>}
       <div className="form-container slidefade animate-slidefade z-applicable">
       <h3 className="title">Sign Up</h3>
       <form action="">

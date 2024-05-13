@@ -17,6 +17,9 @@ function Signin(props){
     const FirebaseSignIn = async ()=>{
         try{
           await signInWithEmailAndPassword(auth, email, password)
+          // Perform login logic
+          // Save user data to local storage
+          localStorage.setItem('userEmail', email);
           navigate("/products")
         }
         catch(e){
@@ -40,9 +43,9 @@ function Signin(props){
     return(
         <div>
                 <div className="form-container slidefade animate-slidefade z-applicable">
-                <div className="password-error">
+                {errorMessage &&<div className="password-error">
             Error: {errorMessage}
-        </div>
+        </div>}
       <h3 className="title">Sign In</h3>
       <form action="">
           <input type="email" placeholder="Email" name="" id="" onChange={(e)=>setEmail(e.target.value)}/> 

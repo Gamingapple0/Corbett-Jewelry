@@ -1,0 +1,48 @@
+.payment-confirmation-wrapper{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+.payment-confirmation-wrapper > *{
+    padding: 10px;
+    font-size: 24px;
+    margin: auto;
+}
+
+.payment-confirmation-wrapper > img{
+    width: 300px;
+    margin-top: 10px;
+ 
+}
+
+.payment-confirmation-wrapper > h1{
+    font-weight: bold;
+}
+
+.payment-btn{
+    margin-top: 15px;
+}
+
+.payment-btn:hover{
+    background: #08AEC4;
+    border: 1px solid #08AEC4;
+    color: #fff;
+    transition: background 0.5s;
+}
+
+.success-button{
+    width: 220px;
+    margin-top: 100px;
+}
+
+.success-container{
+    display: grid;
+    justify-content: center;
+}
+
+.success-container > h1{
+    margin: 15px;
+    font-size: xxx-large;
+}

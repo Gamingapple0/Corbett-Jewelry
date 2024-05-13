@@ -14,6 +14,7 @@ function Navbar(props) {
     try {
       await signOut(auth);
       setSignnedIn(null);
+      localStorage.setItem('userEmail', "");
     } catch (error) {
       console.error('Error signing out:', error);
     }

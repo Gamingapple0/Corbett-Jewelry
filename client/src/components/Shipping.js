@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import "./Shipping.css";
 
 const Shipping = () => {
   const [formValues, setFormValues] = useState({
     fullName: '',
     address: '',
-    city: '',
+    zipCode: '',
     country: '',
     state: '',
     correctInfoConfirmation: false
   });
 
-const location = useLocation();
-const productDetailItem = location.state?.productDetailItem;
-console.log(productDetailItem)
+  const navigate = useNavigate();
+
+  const [errorMessage, setErrorMessage] = React.useState(null)
+    const [shippingValidated, setShippingValidated] = useState(false);
+    const [shippingPrice, setShippingPrice] = useState(0);
+
+    const location = useLocation();
+    const productDetailItem = location.state?.productDetailItem;
+    console.log(productDetailItem)
 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
-
     setFormValues({ ...formValues, [name]: value });
   };
 
@@ -31,14 +34,49 @@ console.log(productDetailItem)
   };
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission
+  const handleSubmit = () => {
+    const apiUrl = "http://localhost:8081";
+    const fetchData = async () => {
+      const { fullName, address, zip, country, state } = formValues;
+
+      // Encode each part of the address
+      const encodedFullName = encodeURIComponent(fullName);
+      const encodedAddress = encodeURIComponent(address);
+      const encodedZip = encodeURIComponent(zip);
+      const encodedCountry = encodeURIComponent(country);
+      const encodedState = encodeURIComponent(state);
+    
+      // Concatenate the encoded parts with '/'
+      const queryString = `?name=${encodedFullName}&address=${encodedAddress}&zipCode=${encodedZip}&country=${encodedCountry}&state=${encodedState}`;
+    
+      // Log the complete API URL
+      console.log(apiUrl + "/api/shipping" + queryString);
+      var response = await fetch(apiUrl + "/api/shipping" + queryString); 
+      const res = await response.json();
+      if(response.status === 200){
+        setShippingPrice(res.price);
+        setShippingValidated(true);
+        const shippingState = {formValues, shippingPrice: res.price, shippingValidated: true, productDetailItem: productDetailItem}
+        navigate("/payment", { state: { shippingState } })
+      }
+      else{
+        console.log(response.status);
+        console.log(res.message)
+        setErrorMessage(res.message)
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 2000);
+      }
+      console.log(res);
+      }
+      
+  fetchData();
+    
   };
 
   useEffect(() => {
-    const { fullName, address, city, country, state } = formValues;
-    const totalEmptyInputs = [fullName, address, city, country, state].filter(
+    const { fullName, address, zip, country, state } = formValues;
+    const totalEmptyInputs = [fullName, address, zip, country, state].filter(
       (value) => !value
     ).length;
 
@@ -48,9 +86,14 @@ console.log(productDetailItem)
     const { correctInfoConfirmation } = formValues;
   }, [formValues.correctInfoConfirmation]);
 
+
+
   return (
     <article className="m-checkout">
-      <form className="m-checkout__form" id="checkout_form" onSubmit={handleSubmit}>
+              {errorMessage &&<div className="password-error">
+            Error: {errorMessage}
+        </div>}
+      <div className="m-checkout__form" id="checkout_form">
         <fieldset>
           <input
             id="full_name"
@@ -78,16 +121,16 @@ console.log(productDetailItem)
           />
           <label htmlFor="address">Address</label>
           <input
-            id="city"
+            id="zip"
             type="text"
-            placeholder="Gotham City"
+            placeholder="3000"
             required
-            pattern="^[A-Z][a-zA-Z ]+"
-            name="city"
-            value={formValues.city}
+            pattern="^\d{4}$"
+            name="zip"
+            value={formValues.zip}
             onChange={handleInputChange}
           />
-          <label htmlFor="city">City</label>
+          <label htmlFor="zip">Zip Code</label>
           <input
             id="country"
             type="text"
@@ -124,13 +167,14 @@ console.log(productDetailItem)
             />
           </div>
           <button
+            onClick={handleSubmit}
             className="btn btn--block btn--rounded btn--success js-ship-the-products"
             disabled={!formValues.correctInfoConfirmation}
           >
             Ship my products
           </button>
         </fieldset>
-      </form>
+      </div>
     </article>
   );
 };

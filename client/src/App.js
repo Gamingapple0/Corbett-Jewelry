@@ -7,6 +7,9 @@ import Navbar from './components/Navbar';
 import Home from './components/Home'
 import Signup from './components/Signup';
 import Signin from './components/Signin';
+import Payment from './components/Payment';
+import Shipping from './components/Shipping';
+import Success from './components/Success';
 
 import { auth } from './config/firebase'
 
@@ -18,7 +21,6 @@ import {
     useLocation,
     Router
   } from "react-router-dom";
-import Shipping from './components/Shipping';
 
 
 
@@ -35,6 +37,9 @@ function App() {
             <Route path="/signin" element={<Signin></Signin>}></Route>
             <Route path="/products" element={<Home></Home>}></Route>
             <Route path="/shipping" element={<Shipping></Shipping>}></Route>
+            <Route path="/payment" element={<Payment></Payment>}></Route>
+            <Route path="/success" element={<Success></Success>}></Route>
+            <Route path="/failed" element={<Home></Home>}></Route>
             <Route path="*" element={<Signin/>} />
             {/* <Route path="/corbett-jewelry" element={<Home setLocation={setLocation}/>} /> */}
         </Route>
