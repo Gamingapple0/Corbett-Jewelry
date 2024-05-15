@@ -12,8 +12,9 @@ var apiKey = `${process.env.FREBASE_KEY}`;
 console.log(apiKey)
 
 
+
 const firebaseConfig = {
-  apiKey: secrets.FIREBASE_KEY,
+  apiKey: process.env.FREBASE_KEY,
   authDomain: "corbett-jewelry.firebaseapp.com",
   projectId: "corbett-jewelry",
   storageBucket: "corbett-jewelry.appspot.com",
