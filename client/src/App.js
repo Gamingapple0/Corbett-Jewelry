@@ -19,7 +19,8 @@ import {
     createRoutesFromElements,
     Route,
     useLocation,
-    Router
+    Router,
+    createHashRouter
   } from "react-router-dom";
 
 
@@ -27,9 +28,10 @@ import {
 
 function App() {
   var [location, setLocation] = React.useState('');
+  var [paymentProcessing, setPaymentProcessing] = React.useState(false);
   // var [signedIn, setSignedIn] = React.useState(false);
 
-  const router = createBrowserRouter(
+  const router = createHashRouter(
     createRoutesFromElements(
         <Route path="/" element={location != '/' && <Navbar/>}>
             <Route index element={<Signin setLocation={setLocation}/>}></Route>
@@ -38,7 +40,7 @@ function App() {
             <Route path="/products" element={<Home></Home>}></Route>
             <Route path="/shipping" element={<Shipping></Shipping>}></Route>
             <Route path="/payment" element={<Payment></Payment>}></Route>
-            <Route path="/success" element={<Success></Success>}></Route>
+            <Route path="/sucess" element={<Success></Success>}></Route>
             <Route path="/failed" element={<Home></Home>}></Route>
             <Route path="*" element={<Signin/>} />
             {/* <Route path="/corbett-jewelry" element={<Home setLocation={setLocation}/>} /> */}
