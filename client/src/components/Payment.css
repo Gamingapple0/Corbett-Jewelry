@@ -32,8 +32,10 @@
     transition: background 0.5s;
 }
 
+
 .success-button{
     width: 220px;
+    margin: auto;
     margin-top: 100px;
 }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import test from "../images/test_product.png"
 import Card from "./Card";
 import Details from "./Details";
+import "./Home.css"
 
 function Home(){
     const [productData, setProductData] = useState([]);
@@ -10,10 +11,13 @@ function Home(){
 
     useEffect(() => {
         const fetchData = async () => {
-            var response = await fetch('http://localhost:8080/api/products'); 
+          if (productData.length < 1){
+            var response = await fetch('https://us-central1-corbett-jewelry.cloudfunctions.net/products/api'); 
+            // var response = {}
             const res = await response.json();
             setProductData(res);
             console.log(res);
+          }
             }
             
         fetchData();
@@ -23,6 +27,10 @@ function Home(){
         console.log(id);
         setChosenProductIndex(id);
         setViewDetails(true);
+      }
+
+      const handleBack = ()=>{
+        setViewDetails(!viewDetails)
       }
 
       const DetailedCard = (product)=>{
@@ -53,6 +61,7 @@ function Home(){
     return (
         
         <div>
+        {viewDetails && <button onClick={()=>{handleBack()}} className="back-button">Back</button>}
         {viewDetails ? DetailedCard(productData[chosenProductIndex]) : ProductCards(productData)}
       </div>
     )

@@ -8,11 +8,12 @@ import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const apiKey = `${process.env.FREBASE_KEY}`;
+var apiKey = `${process.env.FREBASE_KEY}`;
+console.log(apiKey)
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBoks-qQV7eu9iAtQwellLY5OfgaesryAg",
+  apiKey: process.env.FREBASE_KEY,
   authDomain: "corbett-jewelry.firebaseapp.com",
   projectId: "corbett-jewelry",
   storageBucket: "corbett-jewelry.appspot.com",

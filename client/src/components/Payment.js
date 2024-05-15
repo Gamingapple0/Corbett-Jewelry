@@ -11,7 +11,7 @@ const Payment = ()=>{
     localStorage.setItem('total', sesstionData.shippingPrice + sesstionData.productDetailItem.price)
     localStorage.setItem("shipping", JSON.stringify(sesstionData));
     const makePayment = async()=>{
-        const apiUrl = "http://localhost:5000";
+        const apiUrl = "https://us-central1-corbett-jewelry.cloudfunctions.net/payment";
         const stripe = await loadStripe("pk_test_51NeC8IBhyB2h88yTEEvfInrNsPzgFShuYa1JCGFkZta5KLknwrgSUXuvigwArN66vkBe8uHgf5TSZfCRXzQP8ch80028jfY56v");
         const body = {
             productName:sesstionData.productDetailItem.title,
@@ -21,7 +21,7 @@ const Payment = ()=>{
         const headers = {
             "Content-Type": "application/json"
         }
-        const response = await fetch(apiUrl + "/api/payment", {
+        const response = await fetch(apiUrl + "/api", {
             method: "POST",
             body: JSON.stringify(body),
             headers: headers})

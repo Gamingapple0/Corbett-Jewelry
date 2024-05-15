@@ -35,7 +35,7 @@ const Shipping = () => {
 
 
   const handleSubmit = () => {
-    const apiUrl = "http://localhost:8081";
+    const apiUrl = "https://us-central1-corbett-jewelry.cloudfunctions.net/shipping";
     const fetchData = async () => {
       const { fullName, address, zip, country, state } = formValues;
 
@@ -50,8 +50,8 @@ const Shipping = () => {
       const queryString = `?name=${encodedFullName}&address=${encodedAddress}&zipCode=${encodedZip}&country=${encodedCountry}&state=${encodedState}`;
     
       // Log the complete API URL
-      console.log(apiUrl + "/api/shipping" + queryString);
-      var response = await fetch(apiUrl + "/api/shipping" + queryString); 
+      console.log(apiUrl + queryString);
+      var response = await fetch(apiUrl + "/api" + queryString); 
       const res = await response.json();
       if(response.status === 200){
         setShippingPrice(res.price);

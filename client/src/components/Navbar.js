@@ -9,7 +9,7 @@ import { signOut } from 'firebase/auth';
 
 function Navbar(props) {
   const [signnedIn, setSignnedIn] = useState(null);
-
+  console.log(auth)
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -99,7 +99,7 @@ function Navbar(props) {
         </div>
 
         <div className="nav-links navbar-items">
-          <NavLink to="/products">Home</NavLink>
+          {signnedIn && <NavLink to={`/products`}>Home</NavLink>}
           {!signnedIn && <NavLink to={`/signup`}>Sign-Up</NavLink>}
           {signnedIn && <NavLink onClick={handleSignOut}>Sign-Out</NavLink>}
           {!signnedIn && <NavLink to="/signin">Sign-In</NavLink>}

@@ -1,15 +1,18 @@
 import { useEffect, memo } from "react";
 import "./Payment.css"
+import { useNavigate } from "react-router";
 
 const Success = () => {
 
-    const apiUrl = 'http://localhost:3001';
+    const navigate = useNavigate();
+
+    const apiUrl = 'https://us-central1-corbett-jewelry.cloudfunctions.net/order';
     console.log(localStorage.getItem("shipping"));
     const shippingInfo = JSON.parse(localStorage.getItem("shipping"));
 
     const fetchData = async () => {
       try {
-        const response = await fetch(apiUrl + '/api/order', {
+        const response = await fetch(apiUrl + '/api', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -25,6 +28,7 @@ const Success = () => {
   
         if (response.ok) {
           console.log('Email sent successfully');
+          navigate("/products")
         } else {
           console.error('Error sending email');
         }
@@ -37,8 +41,8 @@ const Success = () => {
 
     return (
         <div className="success-container">
-            <h1>Success!!</h1>
-            <button onClick={fetchData}className="success-button">Get Email!</button>
+            <h1>Payment Confimred</h1>
+            <button onClick={fetchData}className="success-button">Finalize Order!</button>
         </div>
     )
 }
