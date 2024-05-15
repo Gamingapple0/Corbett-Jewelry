@@ -16,7 +16,7 @@ const Payment = ()=>{
         const body = {
             productName:sesstionData.productDetailItem.title,
             amount: sesstionData.shippingPrice + sesstionData.productDetailItem.price,
-            url:"http://localhost:3000"
+            url:"http://corbett-jewelry.web.app:3000"
         }
         const headers = {
             "Content-Type": "application/json"
