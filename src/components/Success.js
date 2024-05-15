@@ -1,4 +1,4 @@
-import { useEffect, memo } from "react";
+
 import "./Payment.css"
 import { useNavigate } from "react-router";
 
@@ -47,4 +47,4 @@ const Success = () => {
     )
 }
 
-export default memo(Success);
+export default Success;
